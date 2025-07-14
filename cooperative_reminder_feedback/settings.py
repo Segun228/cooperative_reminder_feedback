@@ -1,6 +1,7 @@
 
 
 from pathlib import Path
+from corsheaders.defaults import default_headers, default_methods
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -26,6 +27,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -34,6 +36,25 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "https://habit-builder-a1v0.onrender.com"
+]
+
+
+CORS_ALLOW_HEADERS = list(default_headers) + [
+    "content-type",
+    "authorization",
+]
+
+CORS_ALLOW_METHODS = list(default_methods) + [
+    "DELETE",
+    "PUT",
+    "PATCH",
+    "POST"
+]
+
 
 ROOT_URLCONF = "cooperative_reminder_feedback.urls"
 
